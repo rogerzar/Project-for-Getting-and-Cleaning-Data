@@ -24,12 +24,12 @@
 library(dplyr)
 
 # Read data files
-trainX <- tbl_df(read.table("./data/UCI HAR Dataset/train/x_train.txt")) # train set 
-trainY <- tbl_df(read.table("./data/UCI HAR Dataset/train/y_train.txt")) # test labels 1-6 (activities)
-trainSubj <- tbl_df(read.table("./data/UCI HAR Dataset/train/subject_train.txt")) # Subject ID's, 1-30
-testX <- tbl_df(read.table("./data/UCI HAR Dataset/test/x_test.txt")) # test set
-testY <- tbl_df(read.table("./data/UCI HAR Dataset/test/y_test.txt")) # test labels 1-6 (activities)
-testSubj <- tbl_df(read.table("./data/UCI HAR Dataset/test/subject_test.txt")) # Subject ID's, 1-30
+trainX <- tbl_df(read.table("./UCI HAR Dataset/train/x_train.txt")) # train set 
+trainY <- tbl_df(read.table("./UCI HAR Dataset/train/y_train.txt")) # test labels 1-6 (activities)
+trainSubj <- tbl_df(read.table("./UCI HAR Dataset/train/subject_train.txt")) # Subject ID's, 1-30
+testX <- tbl_df(read.table("./UCI HAR Dataset/test/x_test.txt")) # test set
+testY <- tbl_df(read.table("./UCI HAR Dataset/test/y_test.txt")) # test labels 1-6 (activities)
+testSubj <- tbl_df(read.table("./UCI HAR Dataset/test/subject_test.txt")) # Subject ID's, 1-30
 
 # Rename Subject IDs and add column to distinguish training and testing groups
 names(trainSubj)[1] <- "IDnum"
@@ -45,7 +45,7 @@ subj <- bind_rows(trainSubj, testSubj)
 ##      Requirement 1 completed -- Training and test sets combined.
 
 # Read features, extract those involving only mean and standard deviation
-features <- read.table("./data/UCI HAR Dataset/features.txt")
+features <- read.table("./UCI HAR Dataset/features.txt")
 goodindex <- grep("-mean\\(\\)|-std\\(\\)", features$V2)
 x <- x[goodindex]
 
@@ -62,7 +62,7 @@ names(x) <- gsub("-std\\(\\)-", "StDev", names(x))
 names(x) <- gsub("-std\\(\\)", "StDev", names(x))
 
 # Rename activity variable and values
-activities <- read.table("./data/UCI HAR Dataset/activity_labels.txt")
+activities <- read.table("./UCI HAR Dataset/activity_labels.txt")
 y <- mutate(y, newact = activities[y$V1[],2])
 y <- select(y, 2)
 names(y) <- "activity"
