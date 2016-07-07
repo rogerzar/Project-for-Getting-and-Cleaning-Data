@@ -78,6 +78,6 @@ write.table(mydt, "TidyDataSet1.txt")
 mydtGrouped <- group_by(mydt, IDnum, cohort, activity) 
 # Note: including "cohort" in the command above avoids warnings in next step
 mydtGroupedMeans <- summarize_each(mydtGrouped, funs(mean))
-write.table(mydtGroupedMeans, "TidyDataSet2.txt")
+write.table(mydtGroupedMeans, "TidyDataSet2.txt", row.names = FALSE)
 
 ##      Requirement 5 completed -- TidyDataSet2.txt is the desired data set of averages.
